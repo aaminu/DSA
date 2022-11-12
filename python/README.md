@@ -7,7 +7,7 @@ All data structure and algo are written in python (Python 3.9). Tests are also w
 3. In your terminal (Mac, Linux), use the following command
     ```bash
     $ python -m venv venv
-    $ source activate venv/bin/activate
+    $ source  venv/bin/activate
     (venv)$ pip install -r requirements.txt
     ```
-4. In windows, replace ``` source activate venv/bin/activate``` with  ``` source activate venv/Scripts/activate```
+4. In windows, replace ``` source venv/bin/activate``` with  ``` source venv/Scripts/activate```

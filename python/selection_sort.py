@@ -1,9 +1,9 @@
-""" selection Sort Algorithm """
+""" Selection Sort Algorithm O(n^2) """
 
 from typing import Union
 
-a = [1.0, 2.0, 3.0, 4.0]
 Num = Union[int, float]
+
 
 def find_smallest_index(arr: list[Num]) -> int:
     smallest = arr[0]
@@ -14,7 +14,8 @@ def find_smallest_index(arr: list[Num]) -> int:
             smallest = arr[index]
     return smallest_index
 
-def selection_sort(arr:list[Num]) -> list[Num]:
+
+def selection_sort(arr: list[Num]) -> list[Num]:
     new_array = []
     for index in range(len(arr)):
         smallest = find_smallest_index(arr)
