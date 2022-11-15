@@ -47,3 +47,20 @@ def test_recursive_count_1(input_arr, output):
 
     # Assert
     assert response == output
+
+
+@pytest.mark.parametrize(
+    "input_arr, output",
+    [
+        (list(range(100)), 99),
+        (list(range(78, 55, -1)), 78),
+        ([], None),
+        ([1], 1)
+    ]
+)
+def test_recursive_max_1(input_arr, output):
+    # Act
+    response = recursive_max(input_arr)
+
+    # Assert
+    assert response == output
