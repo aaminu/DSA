@@ -20,7 +20,7 @@ def recursive_count(arr: list[Num]) -> Num:
     return 1 + recursive_count(arr)
 
 
-def recursive_max(arr: list[Num]) -> Num | None:
+def recursive_max(arr: list[Num]) -> Union[Num, None]:
     """Get the maximum number of in an array using recurssion"""
     if len(arr) == 0:
         return None
