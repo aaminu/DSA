@@ -1,4 +1,4 @@
-""" Quick Sort Algorithm based Divide and Conquer"""
+""" Quick Sort Algorithm based Divide and Conquer O(nlog(n))"""
 
 from typing import Union
 import random

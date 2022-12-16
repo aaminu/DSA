@@ -17,7 +17,7 @@ def find_smallest_index(arr: list[Num]) -> int:
 
 def selection_sort(arr: list[Num]) -> list[Num]:
     new_array = []
-    for index in range(len(arr)):
+    for _ in range(len(arr)):
         smallest = find_smallest_index(arr)
         new_array.append(arr.pop(smallest))
     return new_array
