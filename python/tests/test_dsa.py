@@ -46,3 +46,48 @@ def test_stack_2():
     # Asset
     assert response1 == "Item should be of type <class 'float'>"
     assert response2 == "Stack is Full"
+
+
+########################## Queue #########################
+def test_queue_1():
+    # Gather
+    qu = Queue(int, 5)
+    qu.enqueue(5)
+    qu.enqueue(7)
+    qu.enqueue(8)
+    qu.enqueue(1)
+
+    # Act
+    response1 = qu.dequeue()
+    response2 = qu.dequeue()
+    response3 = qu.peek()
+    response4 = qu.dequeue()
+
+    # Asset
+    assert response1 == 5
+    assert response2 == 7
+    assert response3 == response4
+
+
+def test_queue_2():
+
+    # Gather
+    qu = Queue(float, 3)
+
+    # Act
+    try:
+        qu.enqueue(1.0)
+        qu.enqueue(2.567)
+        qu.enqueue(1)
+    except TypeError as t:
+        response1 = str(t)
+
+    try:
+        qu.enqueue(5.0)
+        qu.enqueue(3.5)
+    except ValueError as v:
+        response2 = str(v)
+
+    # Asset
+    assert response1 == "Item should be of type <class 'float'>"
+    assert response2 == "Queue is Full"

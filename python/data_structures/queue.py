@@ -11,7 +11,7 @@ class Queue():
 
     def enqueue(self, item):
         if self.isFull():
-            raise ValueError("Stack is Full")
+            raise ValueError("Queue is Full")
         if not isinstance(item, self.datatype):
             raise TypeError("Item should be of type {}".format(self.datatype))
         self.__queue.append(item)
