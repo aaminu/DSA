@@ -14,12 +14,12 @@ private:
     int _size;
 
 public:
-    Stack(int size = STACK_SIZE);
+    Stack(int = STACK_SIZE);
     ~Stack();
 
-    void push(T item);
-    T pop();
-    const T *peek();
+    void push(const T &item);
+    T *pop();        // returns null-pointer if empty
+    const T *peek(); // returns null-pointer if empty
 
     bool isEmpty();
     bool isFull();
@@ -55,20 +55,20 @@ bool Stack<T>::isFull()
 
 /*returns total size of stack*/
 template <class T>
-int Stack<T>::size() const
+int Stack<T>::capacity() const
 {
     return _size;
 }
 
 /*returns capacity of stack usuage*/
 template <class T>
-int Stack<T>::capacity() const
+int Stack<T>::size() const
 {
     return top + 1;
 }
 
 template <class T>
-void Stack<T>::push(T item)
+void Stack<T>::push(const T &item)
 {
     if (isFull())
     {
@@ -79,13 +79,14 @@ void Stack<T>::push(T item)
 }
 
 template <class T>
-T Stack<T>::pop()
+T *Stack<T>::pop()
 {
     if (isEmpty())
     {
-        exit(EXIT_FAILURE);
+        return nullptr;
     }
-    return st_array[top--];
+    top--;
+    return st_array + top + 1;
 }
 
 template <class T>
@@ -93,7 +94,7 @@ const T *Stack<T>::peek()
 {
     if (isEmpty())
     {
-        exit(EXIT_FAILURE);
+        return nullptr;
     }
 
     return st_array + top;
