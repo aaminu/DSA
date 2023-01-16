@@ -85,8 +85,8 @@ T *Stack<T>::pop()
     {
         return nullptr;
     }
-    top--;
-    return st_array + top + 1;
+
+    return &st_array[top--];
 }
 
 template <class T>
@@ -97,7 +97,7 @@ const T *Stack<T>::peek()
         return nullptr;
     }
 
-    return st_array + top;
+    return &st_array[top];
 }
 
 #endif
