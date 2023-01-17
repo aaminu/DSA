@@ -44,3 +44,38 @@ TEST_F(QueueTest, DequeueWorks)
     EXPECT_EQ(*n, 2);
     EXPECT_EQ(q2_.size(), 1);
 }
+
+TEST_F(QueueTest, EnqueueWorks)
+{
+
+    q0_.enqueue(2);
+    q0_.enqueue(3);
+    EXPECT_EQ(q0_.size(), 2);
+
+    q1_.enqueue(2);
+    q1_.enqueue(3);
+    EXPECT_EQ(q1_.size(), 3);
+}
+
+TEST_F(QueueTest, PeekWorks)
+{
+
+    const int *n = q1_.peek();
+    ASSERT_NE(n, nullptr);
+    EXPECT_EQ(*n, 1);
+    EXPECT_EQ(q1_.size(), 1);
+
+    q2_.dequeue();
+    const int *m = q2_.peek();
+    ASSERT_NE(m, nullptr);
+    EXPECT_EQ(*m, 3);
+    EXPECT_EQ(q2_.size(), 1);
+}
+
+TEST_F(QueueTest, IsFullWorks)
+{
+
+    q2_.enqueue(3);
+    EXPECT_EQ(q2_.isFull(), true);
+    EXPECT_EQ(q2_.size(), 3);
+}

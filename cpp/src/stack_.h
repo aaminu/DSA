@@ -2,6 +2,7 @@
 #define STACK_H_
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #define STACK_SIZE 10
 
@@ -72,6 +73,7 @@ void Stack<T>::push(const T &item)
 {
     if (isFull())
     {
+        fprintf(stderr, "Stack is Full");
         exit(EXIT_FAILURE);
     }
     top++;

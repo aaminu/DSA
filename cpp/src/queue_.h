@@ -2,6 +2,7 @@
 #define QUEUE_H_
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #define QUEUE_SIZE 10
 
@@ -42,6 +43,7 @@ void Queue<T>::enqueue(const T &item)
 {
     if (isFull())
     {
+        fprintf(stderr, "Queue is Full");
         exit(EXIT_FAILURE);
     }
 
