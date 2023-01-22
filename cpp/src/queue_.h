@@ -9,11 +9,12 @@
 template <class T>
 class Queue
 {
-private:
+protected:
     T *qu_array;
     int front;
     int back;
     int _size;
+    int _capacity;
 
 public:
     Queue(int = QUEUE_SIZE);
@@ -30,7 +31,7 @@ public:
 };
 
 template <class T>
-Queue<T>::Queue(int size) : _size(size), front(-1), back(-1), qu_array(new T[size]) {}
+Queue<T>::Queue(int size) : _capacity(size), front(-1), back(-1), qu_array(new T[size]), _size(0) {}
 
 template <class T>
 Queue<T>::~Queue()
@@ -51,6 +52,7 @@ void Queue<T>::enqueue(const T &item)
     {
         front++;
     }
+    _size++;
     back++;
     qu_array[back] = item;
 }
@@ -61,6 +63,7 @@ T *Queue<T>::dequeue()
     if (isEmpty())
         return nullptr;
 
+    _size--;
     if (front == back)
     {
         int tmp = front;
@@ -92,30 +95,87 @@ bool Queue<T>::isEmpty()
 template <class T>
 bool Queue<T>::isFull()
 {
-    return (back + 1) == _size;
+    return (back + 1) == _capacity;
 }
 
 /*returns total size of queue*/
 template <class T>
 int Queue<T>::capacity() const
 {
-    return _size;
+    return _capacity;
 }
 
 /*returns capacity of queue usuage*/
 template <class T>
 int Queue<T>::size() const
 {
-    if (back == -1)
-        return 0;
+    return _size;
+}
 
-    if (front == back)
-        return 1;
+//----------------------------- CIRCULAR QUEUE -----------------------------------//
+template <class T>
+class CircularQueue : public Queue<T>
+{
+public:
+    using Queue<T>::Queue; // Using Queue Constructors
 
-    if (front == 0)
-        return back + 1;
+    bool isFull();
 
-    return (back - front + 1);
+    void enqueue(const T &item);
+    T *dequeue();
+};
+
+template <class T>
+bool CircularQueue<T>::isFull()
+{
+    if ((this->back + 1) == this->_capacity && this->front == 0)
+    {
+        return true;
+    }
+
+    if (this->front == this->back + 1)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+template <class T>
+void CircularQueue<T>::enqueue(const T &item)
+{
+    if (isFull())
+    {
+        fprintf(stderr, "Queue is Full");
+        exit(EXIT_FAILURE);
+    }
+
+    if (this->isEmpty())
+    {
+        this->front++;
+    }
+    this->_size++;
+    this->back = (this->back + 1) % this->_capacity;
+    this->qu_array[this->back] = item;
+}
+
+template <class T>
+T *CircularQueue<T>::dequeue()
+{
+    if (this->isEmpty())
+        return nullptr;
+
+    this->_size--;
+    if (this->front == this->back)
+    {
+        int tmp = this->front;
+        this->front = -1;
+        this->back = -1;
+        return &this->qu_array[tmp];
+    }
+    int tmp = this->front;
+    this->front = (this->front + 1) % this->_capacity;
+    return &this->qu_array[tmp];
 }
 
 #endif
