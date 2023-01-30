@@ -1,5 +1,5 @@
 from data_structures.stack import Stack
-from data_structures.queue import Queue
+from data_structures.queue import Queue, Deque
 
 ########################## Stack #########################
 
@@ -91,3 +91,52 @@ def test_queue_2():
     # Asset
     assert response1 == "Item should be of type <class 'float'>"
     assert response2 == "Queue is Full"
+
+######################### Deque #########################
+
+
+def test_deque_1():
+    # Gather
+    dqu = Deque(int, 10)
+    dqu.add_front(5)
+    dqu.add_front(7)
+    dqu.add_back(8)
+    dqu.add_back(1)
+    dqu.enqueue(3)  # Same as add_back
+
+    # Act
+    response1 = dqu.size()
+    response2 = dqu.pop_front()
+    response3 = dqu.pop_back()
+    response4 = dqu.peek()
+    response5 = dqu.pop_front()
+
+    # Asset
+    assert response1 == 5
+    assert response2 == 7
+    assert response3 == 3
+    assert response4 == response5
+
+
+def test_deque_2():
+
+    # Gather
+    qu = Deque(float, 3)
+
+    # Act
+    try:
+        qu.add_back(1.0)
+        qu.add_back(2.567)
+        qu.add_back(1)
+    except TypeError as t:
+        response1 = str(t)
+
+    try:
+        qu.enqueue(5.0)
+        qu.enqueue(3.5)
+    except ValueError as v:
+        response2 = str(v)
+
+    # Asset
+    assert response1 == "Item should be of type <class 'float'>"
+    assert response2 == "Deque is Full"
