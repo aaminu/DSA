@@ -11,3 +11,5 @@ All data structure and algo are written in python (Python 3.9+). Tests are also 
     (venv)$ pip install -r requirements.txt
     ```
 4. In windows, replace ``` source venv/bin/activate``` with  ``` source venv/Scripts/activate``` if you are using gitbash else remove the *source* keyword when using cmd or powershell.
+
+N.B YOu might need to change the command from 3. above to *python3* if *python* doesn't work for you
