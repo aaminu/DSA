@@ -1,7 +1,9 @@
 #include "../src/queue_.h"
+#include "../src/deque_.h"
 
 #include "gtest/gtest.h"
 
+/*  Queue Tests*/
 class QueueTest : public ::testing::Test
 {
 protected:
@@ -80,6 +82,7 @@ TEST_F(QueueTest, IsFullWorks)
     EXPECT_EQ(q2_.size(), 3);
 }
 
+/* Circular Queue Tests*/
 class CircularQueueTest : public ::testing::Test
 {
 protected:
@@ -170,4 +173,81 @@ TEST_F(CircularQueueTest, CircularWorks)
     EXPECT_EQ(q2_.isFull(), true);
     EXPECT_EQ(q2_.size(), 5);
     EXPECT_EXIT(q2_.enqueue(5), testing::ExitedWithCode(1), "Queue is Full");
+}
+
+/* Deque Tests*/
+class DequeTest : public ::testing::Test
+{
+protected:
+    void SetUp() override
+    {
+        // q0_ remains empty
+        q1_.pushFront(1);
+        q2_.pushFront(2);
+        q2_.pushBack(3);
+        q2_.pushFront(4);
+        q2_.pushFront(5);
+    }
+
+    // void TearDown() override {}
+
+    Deque<int> q0_;
+    Deque<int> q1_ = Deque<int>(4);
+    Deque<int> q2_ = Deque<int>(5);
+};
+
+TEST_F(DequeTest, IsEmptyInitially)
+{
+    EXPECT_EQ(q0_.size(), 0);
+}
+
+TEST_F(DequeTest, QueueCapacity)
+{
+    EXPECT_EQ(q0_.capacity(), 10);
+}
+
+TEST_F(DequeTest, PopWorks)
+{
+    EXPECT_EQ(q0_.popBack(), nullptr);
+
+    int *n = q1_.popBack();
+    ASSERT_NE(n, nullptr);
+    EXPECT_EQ(*n, 1);
+    EXPECT_EQ(q1_.size(), 0);
+    n = q1_.popFront();
+    EXPECT_EQ(n, nullptr);
+
+    n = q2_.popBack();
+    ASSERT_NE(n, nullptr);
+    EXPECT_EQ(*n, 3);
+    EXPECT_EQ(q2_.size(), 3);
+    q2_.popFront();
+    n = q2_.popFront();
+    ASSERT_NE(n, nullptr);
+    EXPECT_EQ(*n, 4);
+    EXPECT_EQ(q2_.size(), 1);
+}
+
+TEST_F(DequeTest, PushPeekWorks)
+{
+    q0_.pushFront(2);
+    q0_.pushFront(3);
+    q0_.pushFront(4);
+    EXPECT_EQ(q0_.size(), 3);
+    EXPECT_EQ(*q0_.peekFront(), 4);
+    EXPECT_EQ(*q0_.peekBack(), 2);
+
+    q1_.pushBack(2);
+    q1_.pushBack(3);
+    EXPECT_EQ(q1_.size(), 3);
+    EXPECT_EQ(*q1_.peekFront(), 1);
+    EXPECT_EQ(*q1_.peekBack(), 3);
+}
+
+TEST_F(DequeTest, IsFullWorks)
+{
+    q2_.pushBack(3);
+    EXPECT_EQ(q2_.isFull(), true);
+    EXPECT_EQ(q2_.size(), 5);
+    EXPECT_EXIT(q2_.pushFront(5), testing::ExitedWithCode(1), "Deque is Full");
 }
