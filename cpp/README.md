@@ -1,14 +1,15 @@
 # Intro
 All data structure and algo are written in C++. Testing is done using Googletest. The folder structure is kept simple and shown below:
+```
 cpp
-|- src
-   |- .*h
-   |- .cc
-|- tests
-   |- .cc
-|- CMakeLists.txt
-|- README.md
-
+|--src
+   |--.\*h
+   |--.cc
+|--tests
+   |--.cc
+|--CMakeLists.txt
+|--README.md
+```
 ## Setup
 The setup for testing follows the guide for **CMake** provided by GoogleTest which can be found [here](https://google.github.io/googletest/quickstart-cmake.html). If your preference is **Bazel**, please refer to [this](https://google.github.io/googletest/quickstart-bazel.html) and ignore the setup here.
 
